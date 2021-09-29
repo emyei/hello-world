@@ -10,5 +10,5 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 single-stage        latest              58328409dbf7        2 minutes ago       704MB
 multi-stage         latest              9af3c2a2bf40        23 minutes ago      5.54MB
 ```
-
+v2
 😱
