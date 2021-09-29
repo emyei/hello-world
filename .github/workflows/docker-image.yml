@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: 
+      - master
+      - develop 
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+    
+      - name: Docker Lint
+        uses: luke142367/Docker-Lint-Action@v1.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag emyei/hello-world:0.2.0 
+      
+      - name: Push Docker images
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+          repository: emyei/hello-world
+          tags: 0.2.0
